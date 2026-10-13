@@ -1,0 +1,13 @@
+{
+  "version": "2026-10-12",
+  "orders": [
+    {
+      "orderId": "TRAVEL-1001",
+      "travelerKey": "traveler-1",
+      "route": "Shanghai -> Singapore",
+      "departure": "2026-11-05T09:00:00+08:00",
+      "status": "confirmed",
+      "availableChanges": ["2026-11-06T09:00:00+08:00"]
+    }
+  ]
+}
