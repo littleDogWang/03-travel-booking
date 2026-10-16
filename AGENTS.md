@@ -2,6 +2,10 @@
 
 This guide is for coding agents making changes in `agent-quickstart-nextjs`.
 
+## U.S. scenario content
+
+Use a United States setting for fictional business examples, UI copy, Agent context and sample data. Use U.S. cities and addresses, American English (`en-US`), USD for configured prices, and U.S. local dates and times. Use an explicit IANA time zone and the date-correct UTC offset, including daylight saving time; keep data, prompts, tools, exports and UI labels consistent. Do not introduce East Asian locations, regional currencies or time zones into scenario examples. Keep fictional data clearly distinguished from live business facts. Preserve original source citations and third-party license attribution accurately.
+
 ## How to Load
 
 This repository uses progressive disclosure documentation. Docs live under `docs/ai/` in three levels.

@@ -7,6 +7,7 @@ export interface TravelOrder {
   travelerKey: string;
   route: string;
   departure: string;
+  departureTimeZone: string;
   status: TravelStatus;
   availableChanges: string[];
 }
