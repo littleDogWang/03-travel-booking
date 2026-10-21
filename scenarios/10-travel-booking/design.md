@@ -1,20 +1,20 @@
-# 出行交通订乘设计
+# Travel and transportation booking design
 
-## 定位
+## Positioning
 
-优先级 P10。最后实现，因为它同时涉及实时查询、修改、取消和多状态一致性。
+Priority P10. Implement last because it combines live lookup, modification, cancellation and consistency across multiple states.
 
-## 目标流程
+## Target flow
 
-用户提供身份和行程信息，Agent 查询模拟订单，解释行程状态，并在明确确认后提交改期或取消请求；任何未确认或失败状态都要保留原订单状态。
+The user provides identity and itinerary information. The Agent looks up simulated orders, explains itinerary status and submits rescheduling or cancellation requests after explicit confirmation. Unconfirmed or failed actions preserve the original order state.
 
-## 第一版范围
+## First release scope
 
-- 数据：固定订单、行程和可用时段。
-- 工具：查询订单、模拟改期、模拟取消。
-- 渠道：Web/RTC；真实电话/IVR 后置。
-- 暂不做：真实票务/交通系统、多供应商、支付和跨系统补偿。
+- Data: fixed orders, itineraries and available times.
+- Tools: order lookup, simulated rescheduling and simulated cancellation.
+- Channel: Web/RTC; real telephone/IVR integration comes later.
+- Excluded: real ticketing/transportation systems, multiple providers, payments and cross-system compensation.
 
-## 失败处理
+## Failure handling
 
-身份不匹配、订单不存在、改期不可用、取消失败和重复请求都必须返回明确状态；Agent 不得仅凭用户口述声称成功。
+Identity mismatches, nonexistent orders, unavailable rescheduling, failed cancellation and repeated requests must return explicit states. The Agent must not claim success solely from user statements.

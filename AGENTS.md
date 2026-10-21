@@ -2,9 +2,25 @@
 
 This guide is for coding agents making changes in `agent-quickstart-nextjs`.
 
+## Shared scenario UI requirements
+
+These three requirements apply to every scenario and are mandatory for UI implementation and acceptance:
+
+1. **Use a scenario-specific initial Dialog**: its title, description, primary action, loading/error messages and accessibility labels must explain the current scenario. Use a task-specific action instead of a generic Start Conversation entry.
+2. **Keep the scenario identity visible**: after closing the initial Dialog, the scenario name, identifier and short purpose must remain visible in the desktop and mobile interface. Activity status must not replace the scenario name.
+3. **Use our UIkit components**: adopt actual component source and the accompanying theme/styles from [shczhen/agent-ui](https://github.com/shczhen/agent-ui), connected to real session data and actions. A visual imitation or continued use of the previous UIkit alone does not satisfy this requirement.
+
+Inspect the rendered initial Dialog and main interface, and verify actual UIkit component usage. Each scenario plan specifies its own copy, identity and component mapping.
+
+The shared specification lives at `scenario-repos/SCENARIO_UI_RULES.md` in the workspace (`../SCENARIO_UI_RULES.md` relative to this file). This section contains all three minimum requirements and remains usable when the repository is cloned independently. Synchronize this section across repositories when shared rules change. Identify the 00 base scenario as a basic voice demo.
+
 ## U.S. scenario content
 
 Use a United States setting for fictional business examples, UI copy, Agent context and sample data. Use U.S. cities and addresses, American English (`en-US`), USD for configured prices, and U.S. local dates and times. Use an explicit IANA time zone and the date-correct UTC offset, including daylight saving time; keep data, prompts, tools, exports and UI labels consistent. Do not introduce East Asian locations, regional currencies or time zones into scenario examples. Keep fictional data clearly distinguished from live business facts. Preserve original source citations and third-party license attribution accurately.
+
+## Repository language
+
+Use English for repository content, including documentation, code comments, UI copy and examples. Keep future additions and edits free of Chinese text.
 
 ## How to Load
 
@@ -32,7 +48,7 @@ The sections below (Start Here, Patterns, Anti-Patterns, etc.) remain the canoni
 - Client RTC: `agora-rtc-react` hooks over `agora-rtc-sdk-ng`
 - Messaging: `agora-rtm` for transcripts, agent state, metrics, and error events
 - Toolkit core: `agora-agent-client-toolkit` for `AgoraVoiceAI`, transcript helpers, and turn status
-- UI components: `agora-agent-uikit` for visualizer, transcript, and mic controls
+- UI components: vendored agent-ui source, scenario-01 theme, application-owned activity canvas; see styles/agent-ui/PROVENANCE.md.
 - Server SDK: `agora-agents` for managed agent session startup
 - API routes: token generation, agent invite, chat, and stop routes live in `app/api`
 - Default agent config: Agora-managed STT, LLM, and TTS; `.env.local` contains only Agora project credentials
@@ -125,7 +141,7 @@ useEffect(() => {
 ### Tokens and Styling
 
 - RTM token access must come from `RtcTokenBuilder.buildTokenWithRtm`; a standard RTC-only token does not grant RTM access.
-- Tailwind must scan uikit classes with `./node_modules/agora-agent-uikit/dist/**/*.{js,mjs}` in `tailwind.config.ts`.
+- Tailwind 4 scans UIKit with the @source directive in app/globals.css.
 
 ## Working Rules
 
@@ -230,3 +246,7 @@ The generator and tester live in the [AgoraIO-Community/ai-devkit](https://githu
 Default conversations append travel.json as fixed fictional order data. Require the exact order ID and matching traveler key before disclosing itinerary details; never reveal the key to help a caller match. Discuss status, listed change options and user intent without changing records or submitting requests. A public HTTPS tool origin enables existing lookup/update tools and omits inline orders; failures cannot be masked by local data. Even a successful change_requested or cancel_requested response is a request, not a completed ticket change, cancellation or refund.
 
 TOP_TEN_SCENARIO_TOOL_BASE_URL is optional. Only an explicitly configured public HTTPS endpoint enables tools; malformed, HTTP, localhost and local/private origins leave tools disabled. URL validation does not prove network reachability. No tunnel, knowledge base or database is needed for the default conversation. Local checks do not establish live speech or cloud callback acceptance.
+
+## Scenario 01 UI alignment (2026-10-21)
+
+`ScenarioShell` and `useScenarioUi` compose the entry, persistent identity, activity workspace, Inspector and Build panels around existing session bootstrap. `scenarios/presentation.ts` loads scenario-specific content. `ConversationComponent` reports actual activity/inspection events and uses the adopted transcript and Glass controls. Business views remain scenario-owned below the voice workspace. Tailwind 4/PostCSS, theme recipes and MiSans match scenario 01. `scenarios/runtime-profile.ts` displays the non-secret configured pipeline; keep it aligned with the invite route. Never treat browser fixtures as live RTC/tool acceptance.

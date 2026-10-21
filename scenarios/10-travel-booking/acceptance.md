@@ -1,25 +1,25 @@
-# 出行交通订乘验收标准
+# Travel and transportation booking acceptance criteria
 
-## 必须通过
+## Required checks
 
-- 身份和订单匹配后才能查询行程。
-- 查询结果与固定订单数据一致。
-- 改期和取消需要用户明确确认。
-- 工具失败时订单保持原状态。
-- 重复改期/取消请求不会造成重复变更。
-- Agent 明确区分“请求已提交”和“变更已确认”。
+- Identity and order must match before itinerary lookup.
+- Lookup results match the fixed order data.
+- Rescheduling and cancellation require explicit user confirmation.
+- Tool failures preserve the original order state.
+- Repeated rescheduling/cancellation requests do not produce duplicate changes.
+- The Agent distinguishes submitted requests from confirmed changes.
 
-## 推荐用例
+## Suggested cases
 
-1. 查询有效行程。
-2. 身份不匹配。
-3. 改期到可用时段。
-4. 改期到不可用时段。
-5. 取消失败后重试。
-6. 重复提交同一变更请求。
+1. Look up a valid itinerary.
+2. Identity mismatch.
+3. Reschedule to an available time.
+4. Reschedule to an unavailable time.
+5. Retry after failed cancellation.
+6. Submit the same change request repeatedly.
 
-## 证据
+## Evidence
 
-- 订单状态前后快照。
-- 工具调用、确认文本和请求 ID。
-- 失败后状态未被错误修改的记录。
+- Order state snapshots before and after changes.
+- Tool calls, confirmation text and request IDs.
+- Records showing failures did not incorrectly modify state.
