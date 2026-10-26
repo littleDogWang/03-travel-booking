@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import {
   lookupTravelOrder,
   updateTravelOrder,
-} from '@/scenarios/10-travel-booking/travel';
+} from '@/lib/travel-booking/travel';
 
 export async function GET(request: Request) {
   const params = new URL(request.url).searchParams;

@@ -4,7 +4,7 @@
 
 A voice itinerary assistant for a fictional New York (JFK) to Los Angeles (LAX) order. It checks the exact order and traveler key before disclosing details, explains the departure in its configured time zone, and can record a change or cancellation request when tools are enabled.
 
-One Next.js process owns the browser application and its HTTP routes. Agora cloud owns the managed STT → LLM → TTS pipeline; the browser is not a local speech/model runtime. The default provider configuration is recorded in the invite route and `scenarios/runtime-profile.ts`.
+One Next.js process owns the browser application and its HTTP routes. Agora cloud owns the managed STT → LLM → TTS pipeline; the browser is not a local speech/model runtime. The default provider configuration is recorded in the invite route and `lib/runtime-profile.ts`.
 
 ## Component Topology
 
@@ -32,8 +32,8 @@ Scenario routes -> process-local state
 - `components/ConversationComponent.tsx`: RTC/microphone hooks, toolkit events and transcript snapshots.
 - `app/api/generate-agora-token/route.ts`: RTM-capable token creation.
 - `app/api/invite-agent/route.ts`: privileged Agent configuration and startup.
-- `scenarios/10-travel-booking/`: source of truth for scenario-specific rules and data.
-- `scenarios/tool-contracts.ts`: available tools, parameter schemas and server-bound call scope.
+- `lib/travel-booking/`: source of truth for scenario-specific rules and data.
+- `lib/agent-tools.ts`: available tools, parameter schemas and server-bound call scope.
 - `lib/conversation.ts`: transcript UID/text normalization.
 
 ## Authentication And Secrets
@@ -59,4 +59,4 @@ The invite body contains `requester_id` and `channel_name`.
 
 The token route returns `{ token, uid, channel }`; stop accepts `{ agent_id }` and handles an already-stopping session idempotently. The prompt contains fixed fictional orders. Matching identity permits itinerary discussion, but the assistant cannot update records or submit a request. `lookup_travel_order` reads a matching order; `update_travel_order` records a confirmed request in process memory. Failed tools cannot fall back to inline order data.
 
-See [Interfaces](docs/ai/L1/06_interfaces.md), [internal recipe](docs/ai/RECIPE.md) and [scenario guide](scenarios/10-travel-booking/README.md) for contracts. Static checks, native startup, Docker startup and complete live speech/tool outcomes are separate evidence.
+See [Interfaces](docs/ai/L1/06_interfaces.md), [internal recipe](docs/ai/RECIPE.md) and [scenario guide](docs/scenario/README.md) for contracts. Static checks, native startup, Docker startup and complete live speech/tool outcomes are separate evidence.
