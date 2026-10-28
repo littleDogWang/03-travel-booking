@@ -16,8 +16,8 @@ Read the [eight-part recipe](RECIPE.md) for example conversations and business c
 ## Run It
 
 ```bash
-git clone https://github.com/littleDogWang/10-travel-booking.git
-cd 10-travel-booking
+git clone https://github.com/littleDogWang/03-travel-booking.git
+cd 03-travel-booking
 pnpm install --frozen-lockfile
 cp env.local.example .env.local
 ```
@@ -106,7 +106,7 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for topology, ownership and deployment de
 | Ask for a change or cancellation | Explain the supported option and ask for explicit confirmation. | A confirmed request intent, not a completed ticket operation. |
 | Confirm the action | Call update_travel_order with a request ID and report the returned state. | change_requested or cancel_requested; failure remains a failure. |
 
-`lookup_travel_order` calls `GET /api/scenarios/10-travel-booking/orders` with `order_id` and `traveler_key`. `update_travel_order` posts the identity, action, request_id and confirmed=true, plus an allowed new_departure for a change. The fixture's original departure is November 5, 2026 at 09:00 EST; its listed change is November 6 at 09:00 EST. These dates do not roll forward.
+`lookup_travel_order` calls `GET /api/scenarios/03-travel-booking/orders` with `order_id` and `traveler_key`. `update_travel_order` posts the identity, action, request_id and confirmed=true, plus an allowed new_departure for a change. The fixture's original departure is November 5, 2026 at 09:00 EST; its listed change is November 6 at 09:00 EST. These dates do not roll forward.
 
 The invite body contains `requester_id` and `channel_name`.
 
@@ -137,8 +137,8 @@ Native hosting runs `pnpm run build` and `pnpm run start` on the documented Node
 ### Docker
 
 ```bash
-docker build --build-arg NEXT_PUBLIC_AGORA_APP_ID=YOUR_AGORA_APP_ID -t 10-travel-booking:local .
-docker run --rm -p 3000:3000 --env-file .env.local 10-travel-booking:local
+docker build --build-arg NEXT_PUBLIC_AGORA_APP_ID=YOUR_AGORA_APP_ID -t 03-travel-booking:local .
+docker run --rm -p 3000:3000 --env-file .env.local 03-travel-booking:local
 ```
 
 Replace `YOUR_AGORA_APP_ID` with the public App ID used in `.env.local`. Next.js embeds that identifier in the browser bundle, so changing projects requires rebuilding the image. The App Certificate is supplied only at container runtime. A container restart does not preserve process memory. This image does not add a shared state service.

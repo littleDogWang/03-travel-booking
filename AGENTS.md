@@ -1,6 +1,6 @@
 # Agent Development Guide
 
-This guide is for coding agents making changes in `10-travel-booking`.
+This guide is for coding agents making changes in `03-travel-booking`.
 
 
 ## U.S. scenario content

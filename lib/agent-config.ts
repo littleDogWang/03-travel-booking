@@ -3,7 +3,7 @@ import type { ScenarioConfig } from '../types/agent-config';
 import travelData from './travel-booking/travel.json';
 
 export const config: ScenarioConfig = {
-  id: '10-travel-booking',
+  id: '03-travel-booking',
   title: 'Travel booking support',
   role: 'a travel itinerary support agent.',
   workflow: 'Collect the minimum identity and itinerary details, look up the configured mock order, explain its status and departure time in departureTimeZone (U.S. Eastern Time, with date-correct daylight saving time), and require explicit confirmation before a change or cancellation request. Preserve the original status when a tool reports failure or the request is repeated.',

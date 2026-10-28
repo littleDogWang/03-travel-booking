@@ -1,5 +1,5 @@
 {
-  "name": "10-travel-booking",
+  "name": "03-travel-booking",
   "version": "0.1.0",
   "description": "Review an itinerary and request a change after identity and confirmation.",
   "private": true,

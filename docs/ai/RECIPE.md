@@ -91,7 +91,7 @@ The upstream baseline is [AgoraIO-Conversational-AI/agent-quickstart-nextjs](htt
 - `GET /api/generate-agora-token` returns `{ token, uid, channel }`.
 - `POST /api/invite-agent` starts the scenario Agent. The invite body contains `requester_id` and `channel_name`.
 - `POST /api/stop-conversation` accepts `{ agent_id }`; already-stopping states are idempotent.
-- `lookup_travel_order` calls `GET /api/scenarios/10-travel-booking/orders` with `order_id` and `traveler_key`. `update_travel_order` posts the identity, action, request_id and confirmed=true, plus an allowed new_departure for a change. The fixture's original departure is November 5, 2026 at 09:00 EST; its listed change is November 6 at 09:00 EST. These dates do not roll forward.
+- `lookup_travel_order` calls `GET /api/scenarios/03-travel-booking/orders` with `order_id` and `traveler_key`. `update_travel_order` posts the identity, action, request_id and confirmed=true, plus an allowed new_departure for a change. The fixture's original departure is November 5, 2026 at 09:00 EST; its listed change is November 6 at 09:00 EST. These dates do not roll forward.
 - Local environment: `env.local.example` → `.env.local`; required keys are the public App ID and server-only App Certificate. [All variables](L1/01_setup.md) include optional business-tool/storage paths.
 - Node.js 22+, pnpm 9.15.9; canonical checks are `pnpm run verify`. `pnpm run verify:docker` is a separate image/startup/scenario-route check.
 - Tool-mode orders and replay records live in process-local Maps. Use one long-lived Node process for a consistent demo; restart resets state. Shared durable storage and real traveler authorization are required before multi-instance or real booking-system use.
@@ -102,7 +102,7 @@ Component layout, presentation copy, model/provider defaults, UI diagnostics and
 
 ## Consumer Onboarding Recipe
 
-1. Clone `https://github.com/littleDogWang/10-travel-booking.git` and change into `10-travel-booking`.
+1. Clone `https://github.com/littleDogWang/03-travel-booking.git` and change into `03-travel-booking`.
 2. With Node.js 22+ and pnpm 9.15.9, run `pnpm install --frozen-lockfile`.
 3. Copy `env.local.example` to `.env.local` only on a clean clone; fill the two Agora project credentials. Alternatively use the ready CLI's template-aware `agora quickstart env write . --template nextjs --project <your-project> --json`.
 4. Run `pnpm run doctor`, then `pnpm run dev`. Open http://localhost:3000 and choose the scenario start action.

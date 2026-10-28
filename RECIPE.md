@@ -2,7 +2,7 @@
 
 Review an itinerary and request a change after identity and confirmation.
 
-[Try locally](#2-try-the-demo) · [Source on GitHub](https://github.com/littleDogWang/10-travel-booking) · [Build with AI](#build-with-ai)
+[Try locally](#2-try-the-demo) · [Source on GitHub](https://github.com/littleDogWang/03-travel-booking) · [Build with AI](#build-with-ai)
 
 TypeScript · Web · Next.js 16 / React 19 · Agora Conversational AI
 
@@ -85,8 +85,8 @@ Leave `TOP_TEN_SCENARIO_TOOL_BASE_URL` unset for the default conversation. To en
 From a terminal, clone this scenario rather than the generic starter:
 
 ```bash
-git clone https://github.com/littleDogWang/10-travel-booking.git
-cd 10-travel-booking
+git clone https://github.com/littleDogWang/03-travel-booking.git
+cd 03-travel-booking
 pnpm install --frozen-lockfile
 cp env.local.example .env.local
 ```
@@ -112,7 +112,7 @@ Open [http://localhost:3000](http://localhost:3000), choose **Review travel plan
 
 ### Tools and result semantics
 
-`lookup_travel_order` calls `GET /api/scenarios/10-travel-booking/orders` with `order_id` and `traveler_key`. `update_travel_order` posts the identity, action, request_id and confirmed=true, plus an allowed new_departure for a change. The fixture's original departure is November 5, 2026 at 09:00 EST; its listed change is November 6 at 09:00 EST. These dates do not roll forward.
+`lookup_travel_order` calls `GET /api/scenarios/03-travel-booking/orders` with `order_id` and `traveler_key`. `update_travel_order` posts the identity, action, request_id and confirmed=true, plus an allowed new_departure for a change. The fixture's original departure is November 5, 2026 at 09:00 EST; its listed change is November 6 at 09:00 EST. These dates do not roll forward.
 
 The invite body contains `requester_id` and `channel_name`. The supplied browser already handles this startup sequence. See [the scenario guide](docs/scenario/README.md) for additional behavior and contracts.
 
@@ -143,7 +143,7 @@ After cloning this repository, paste the following into your coding agent from y
 ```text
 Implement the Travel Itinerary Support recipe in my application.
 
-Read RECIPE.md in the cloned 10-travel-booking repository first, then inspect
+Read RECIPE.md in the cloned 03-travel-booking repository first, then inspect
 its scenario modules, tool contracts and invite route. Read docs/ai/RECIPE.md
 and AGENTS.md in that repository for integration constraints.
 
@@ -171,8 +171,8 @@ These commands describe the repository's supported scripts; they do not attest t
 ### Docker deployment
 
 ```bash
-docker build --build-arg NEXT_PUBLIC_AGORA_APP_ID=YOUR_AGORA_APP_ID -t 10-travel-booking:local .
-docker run --rm -p 3000:3000 --env-file .env.local 10-travel-booking:local
+docker build --build-arg NEXT_PUBLIC_AGORA_APP_ID=YOUR_AGORA_APP_ID -t 03-travel-booking:local .
+docker run --rm -p 3000:3000 --env-file .env.local 03-travel-booking:local
 ```
 
 Replace `YOUR_AGORA_APP_ID` with the public App ID used in `.env.local`. Next.js embeds that identifier in the browser bundle, so changing projects requires rebuilding the image. The App Certificate is supplied only at container runtime. A container restart does not preserve process memory. This image does not add a shared state service.
