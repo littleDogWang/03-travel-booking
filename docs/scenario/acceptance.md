@@ -1,25 +1,25 @@
-# Travel and transportation booking acceptance criteria
+# Conversation-Only Acceptance
 
-## Required checks
+## Local regression
 
-- Identity and order must match before itinerary lookup.
-- Lookup results match the fixed order data.
-- Rescheduling and cancellation require explicit user confirmation.
-- Tool failures preserve the original order state.
-- Repeated rescheduling/cancellation requests do not produce duplicate changes.
-- The Agent distinguishes submitted requests from confirmed changes.
+- Run pnpm run verify.
+- A mocked Agent starts with only requester_id and channel_name.
+- Setting the former business-tool origin must not enable tools or create data state.
+- Business API routes return HTTP 410 and old data workbenches are not rendered.
 
-## Suggested cases
+## Browser checks
 
-1. Look up a valid itinerary.
-2. Identity mismatch.
-3. Reschedule to an available time.
-4. Reschedule to an unavailable time.
-5. Retry after failed cancellation.
-6. Submit the same change request repeatedly.
+- Desktop and mobile initial Dialog, Preview first and persistent identity identify this scenario.
+- The start control is enabled without a business record or shopping session.
+- The first application request on start is the token request, with no business API call.
+- A failed token/invite is reported honestly and allows a retry.
 
-## Evidence
+## Real voice checks
 
-- Order state snapshots before and after changes.
-- Tool calls, confirmation text and request IDs.
-- Records showing failures did not incorrectly modify state.
+- Say: I would like to change my trip. What should I prepare?
+- Say: Help me summarize a question for my travel provider.
+- Ask for a recap, interrupt, correct an earlier detail and request to stop.
+- The assistant never claims a lookup, saved result or external action.
+- Check actual two-way audio, both transcript roles, microphone controls and clean Agent stop.
+
+Mocked checks and browser screenshots do not establish real speech, model behavior or public deployment acceptance.

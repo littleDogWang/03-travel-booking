@@ -1,27 +1,24 @@
-# 10 Travel booking
+# Travel Booking Assistant
 
-`travel.json` is the mock itinerary. The API requires matching traveler
-identity for lookup and `confirmed=true` for change or cancellation requests.
-Request IDs make repeated operations idempotent; a request is not a confirmed
-transport-system change.
+Talk through travel plans, itinerary questions and possible next steps.
 
+## Conversation flow
 
-## Local conversation and optional tools
+Ask what travel question the caller wants to discuss. Use only itinerary details the caller chooses to provide in this conversation. Clarify origin, destination, travel date, local time zone and desired change only when relevant. Help the caller organize a change or cancellation question for the travel provider. Explain that actual options, fees, eligibility and confirmations must come from the booking provider. Ask one question at a time, preserve corrected details, and end with a concise verbal summary of the caller's plans and next step.
 
-Default conversations append travel.json as fixed fictional order data. Require the exact order ID and matching traveler key before disclosing itinerary details; never reveal the key to help a caller match. Discuss status, listed change options and user intent without changing records or submitting requests. A public HTTPS tool origin enables existing lookup/update tools and omits inline orders; failures cannot be masked by local data. Even a successful change_requested or cancel_requested response is a request, not a completed ticket change, cancellation or refund.
+## Boundaries
 
-TOP_TEN_SCENARIO_TOOL_BASE_URL is optional. Only an explicitly configured public HTTPS endpoint enables tools; malformed, HTTP, localhost and local/private origins leave tools disabled. URL validation does not prove network reachability. No tunnel, knowledge base or database is needed for the default conversation. Local checks do not establish live speech or cloud callback acceptance.
+No traveler identities, order records, flights, seats or fare inventory are connected. Do not request a traveler key or order number for lookup. Do not invent an itinerary, verify identity, calculate an unsupported fee, submit a request or claim a completed change, cancellation, refund or saved record.
 
-## U.S. example data
+This first version is conversation-only. No business data lookup, external tools, database, record writes, saved results, or cross-session business history are available. Keep user-provided details only in the current conversation. Never claim an order, appointment, registration, feedback submission, callback, payment, shipment or other external action was created, saved or completed. Offer a verbal summary and explain the appropriate human next step instead. Do not request passwords, verification codes, payment details or unnecessary personal identifiers.
 
-The fictional itinerary is New York (JFK) to Los Angeles (LAX). Departure and change options use `America/New_York`; November dates use EST (`-05:00`). These are local fixtures, not a live airline schedule.
+## Trying the conversation
 
-## Source locations
+- I would like to change my trip. What should I prepare?
+- Help me summarize a question for my travel provider.
 
-This guide lives in documentation; executable code uses the standalone Next.js
-Quickstart layout. Agent instructions and prompt assembly are in
-[lib/agent-config.ts](../../lib/agent-config.ts), optional tool contracts are in
-[lib/agent-tools.ts](../../lib/agent-tools.ts), and presentation content is in
-[lib/presentation.ts](../../lib/presentation.ts). Business modules and fixtures
-live in [lib/travel-booking/](../../lib/travel-booking/). File basenames in this guide
-refer to these source locations, not to files next to this document.
+Ask for a verbal recap before ending. Only the current page retains transcript and diagnostic state; no result, order, appointment, registration or feedback record is saved.
+
+## Implementation
+
+Behavior lives in lib/agent-config.ts. The page uses the shared voice lifecycle. lib/agent-tools.ts is empty and all business API routes return HTTP 410. See [acceptance cases](acceptance.md).

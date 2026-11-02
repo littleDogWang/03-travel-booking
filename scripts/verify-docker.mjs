@@ -6,11 +6,7 @@ const name = '03-travel-booking-smoke-' + randomUUID().slice(0, 8);
 const image = process.env.DOCKER_IMAGE || 'agora-scenario/03-travel-booking:local';
 const appId = '0123456789abcdef0123456789abcdef';
 const certificate = 'fedcba9876543210fedcba9876543210';
-const check = {
-  "path": "/api/scenarios/03-travel-booking/orders?order_id=TRAVEL-1001&traveler_key=traveler-1",
-  "method": "GET",
-  "status": 200
-};
+const check = { path: "/api/generate-agora-token", method: "GET", status: 200 };
 function docker(args, options = {}) {
   const result = spawnSync('docker', args, { encoding: 'utf8', ...options });
   if (result.error) throw result.error;
@@ -35,9 +31,6 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 500));
   }
   assert.ok(ready, 'Container did not serve the home page.');
-  if (check.hotelDate) check.path += new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit',
-  }).format(new Date());
   const response = await fetch(origin + check.path, {
     method: check.method,
     headers: { 'Content-Type': 'application/json' },
@@ -46,8 +39,8 @@ try {
   });
   const body = await response.text();
   assert.equal(response.status, check.status, body);
-  assert.ok(JSON.parse(body), 'Expected a JSON scenario response.');
-  console.log('Docker image, HTTP startup and scenario route passed: 03-travel-booking. No live Agora call was made.');
+  assert.ok(JSON.parse(body), 'Expected a JSON token response.');
+  console.log('Docker image, HTTP startup and token route passed: 03-travel-booking. No live Agora call was made.');
 } catch (error) {
   if (started) console.error(docker(['logs', name]));
   throw error;
