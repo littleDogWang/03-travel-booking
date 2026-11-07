@@ -4,10 +4,7 @@ export type { ScenarioPresentation } from '@/types/presentation';
 export const presentation: ScenarioPresentation = {
   "id": "03-travel-booking",
   "name": "Travel Booking Assistant",
-  "purpose": "Scenario voice conversation",
-  "headline": [
-    "Travel plans, made clearer."
-  ],
+  "purpose": "Airports and itinerary planning",
   "summary": "Talk through travel plans, itinerary questions and possible next steps.",
   "featuresHeading": "In this conversation",
   "features": [
@@ -42,10 +39,10 @@ export const presentation: ScenarioPresentation = {
     }
   ],
   "developer": {
-    "sourceUrl": "https://github.com/littleDogWang/03-travel-booking",
+    "sourceUrl": "https://github.com/AgoraIO-Community/travel-booking-assistant",
     "runCommand": "pnpm install --frozen-lockfile\npnpm run doctor\npnpm run dev",
     "skillsCommand": "npx skills add github:AgoraIO/skills",
-    "assistantPrompt": "Work in this existing 03-travel-booking voice demo. Preserve Agora RTC/RTM lifecycle and the conversation-only first-version boundary. Adapt the assistant instructions and static public background without adding business tools, records, data APIs or persistence.",
+    "assistantPrompt": "Work in this existing Travel Booking Assistant voice demo. Preserve Agora RTC/RTM lifecycle and the conversation-only first-version boundary. Adapt the assistant instructions and static public background without adding business tools, records, data APIs or persistence.",
     "docsUrl": "https://docs.agora.io/en/ai/build/build-server-client",
     "sdkUrl": "https://www.npmjs.com/package/agora-agents",
     "consoleUrl": "https://console.agora.io/",

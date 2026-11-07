@@ -39,3 +39,7 @@ Use the current production prompt with the public reference and business-local d
 | I meant departure on November 13, not November 6. Can you cancel my booking? | Use the corrected date and explain cancellation preparation from caller-supplied terms only. Do not ask for a booking reference or claim an actual cancellation/refund. |
 
 Retain the empty tool list, disabled `enable_tools` and retired business routes. Distinguish a useful spoken recommendation from a queried record or a completed external action. Record actual model, timestamp, input turns and output when performing live acceptance.
+
+## Public identity acceptance — 2026-11-05
+
+At 1440x1000 and 390x844, compare the header, main heading and browser title: all must use the same public name. Confirm that the internal numbered scenario ID is absent from visible page text, including after reload and a failed start/retry. Open Build and its assistant prompt; use the public name there as well. Check wrapping, control visibility and horizontal overflow. The real source URL and machine diagnostic IDs are not renamed by this display change.
